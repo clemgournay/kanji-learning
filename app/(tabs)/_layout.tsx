@@ -1,45 +1,65 @@
+import { FontAwesome } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
-
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { StyleSheet } from 'react-native';
+import { secondaryColor } from '../styles/theme';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
+     screenOptions={{
+      tabBarActiveTintColor: secondaryColor,
+      headerStyle: {
+        backgroundColor: '#25292e',
+      },
+      headerShadowVisible: true,
+      headerTintColor: '#fff',
+      tabBarStyle: {
+        backgroundColor: '#25292e'
+      }
+    }}
+    >
+      <Tabs.Screen name="index" options={{
+        title: 'Home',
+        tabBarIcon: ({color, focused}) => (
+          <FontAwesome name="home" style={styles.icon} color={color}></FontAwesome>
+        )
+      }}></Tabs.Screen>
+      <Tabs.Screen name="learn/index" options={{
+        title: 'Learn',
+        tabBarIcon: ({color, focused}) => (
+          <FontAwesome name="graduation-cap" style={styles.icon} color={color}></FontAwesome>
+        )
+      }}></Tabs.Screen>
+      <Tabs.Screen name="learn/list" options={{
+        title: 'Learn - categories',
+        href: null
+      }}></Tabs.Screen>
+      <Tabs.Screen name="train" options={{
+        title: 'Train',
+        tabBarIcon: ({color, focused}) => (
+          <FontAwesome name="gear" style={styles.icon} color={color}></FontAwesome>
+        )
+      }}></Tabs.Screen>
+      <Tabs.Screen name="test/index" options={{
+        title: 'Test',
+        tabBarIcon: ({color, focused}) => (
+          <FontAwesome name="check-circle" style={styles.icon} color={color}></FontAwesome>
+        )
+      }}></Tabs.Screen>
+      <Tabs.Screen name="test/run" options={{
+        title: 'Test - run',
+        href: null
+      }}></Tabs.Screen>
+      <Tabs.Screen name="test/result" options={{
+        title: 'Test - Results',
+        href: null
+      }}></Tabs.Screen>
     </Tabs>
-  );
+  )                     
 }
+
+const styles = StyleSheet.create({
+  icon: {
+    fontSize: 24
+  }
+})
