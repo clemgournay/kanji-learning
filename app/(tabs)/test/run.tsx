@@ -52,11 +52,9 @@ export default function TestScreen() {
   const failSound = useAudioPlayer(FailSoundAsset);
 
   const handleNext = async () => {
-    console.log('NEXT');
     let newCurrent = current;
     if (current < characters.length - 1) newCurrent = current + 1;
     else {
-      console.log('SAVE NB SUCCESS', nbSuccess);
       await AsyncStorage.setItem('nb_success', nbSuccess.toString());
       router.navigate('/test/result');
     }  

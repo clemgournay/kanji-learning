@@ -9,9 +9,9 @@ type Props = {
 export default function Writepad({parent}: Props) {
 
   if (Platform.OS === 'web') {
-    return <iframe style={styles.webview} src={`http://192.168.1.83/git/Writepad?parent=${parent}`} />
+    return <iframe style={styles.webview} src={`https://writepad.onrender.com/?parent=${parent}`} />
   } else {
-    return <WebView style={styles.webview} source={{ uri: `http://192.168.1.83/git/Writepad/?parent=${parent}` }} />;
+    return <WebView style={styles.webview} source={{ uri: `https://writepad.onrender.com/?parent=${parent}` }} />;
   }
 
 }
